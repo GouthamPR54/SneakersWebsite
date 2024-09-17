@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{% static "css/bootstrap.min.css" %}" type="text/css" rel="stylesheet" />
+    <link href="{% static "css/login.css" %}" type="text/css" rel="stylesheet" />
+    <link href="{% static "css/style.css" %}" type="text/css" rel="stylesheet" />
+
+    <title>Shoe Store</title>
+</head>
+
+<body>
+    <!-- <nav id="nav ">
+        <div class="navItem">
+
+        </div>
+        <div class="navBottom ">
+            <img src="{% static "/image/logo3.png" %}" alt="">
+            <h3 class="menuItem">HOME</h3>
+            <h3 class="menuItem">PRODUCT</h3>
+            <h3 class="menuItem">ABOUT</h3>
+        </div> -->
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="#">
+              <img src="{% static "/image/logo3.png" %}" alt="Logo" height="55" width="65">
+            </a>
+          
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="">
+                  <a class="nav-link text-dark" href="/adminhome/">Home</a>
+                </li>
+                <li class="">
+                  <a class="nav-link text-dark" href="/productpage/">Product</a>
+                </li>
+                <li class="">
+                  <a class="nav-link text-dark" href="/about/">About Us</a>
+                </li>
+              </ul>
+            </div>
+          
+            <!-- <div class="navbar-nav ml-auto">
+                <button href="#" class="btn-danger">Logout</button> 
+            </div> -->
+          </nav>
+        
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <h2 class="heading">Users</h2>
+        <tr>
+            <th>Name</th>
+            <th>Email ID</th>
+            <th>Contact No</th>
+            <th>Status</th>
+            <th>Activate/Deactivate</th>
+            {% for user in userinfo %}
+        <tr>
+        </thead>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.contact}}</td>
+            {% if user.is_active == 1%}
+            <td class="text-success">Active</td>
+            <td>
+                <form method="get" action="/inactivatebtn/">
+                    <input type="hidden" name="userid" value="{{ user.id }}" />
+                    <button type="submit" class="btn-danger">InActivate</button>
+                </form>
+            </td>
+            {% else %}
+            <td class="text-danger">InActive</td>
+            <td>
+                <form method="get" action="/activatebtn/">
+                    <input type="hidden" name="userid" value="{{ user.id }}" />
+                    <button type="submit" class="btn-success">Activate</button>
+            </td>
+            </form>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tr>
+    </table>
+    <table class="table  table-bordered">
+      <thead class="thead-dark">
+      <h2 class="heading">Details</h2>
+      <tr>
+          <th>Productid</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Date</th>
+          <th>Address</th>
+          <th>Quantity</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Contact</th>
+          <th>is_deliverd</th>
+        </thead>
+          {% for order in orderinfo %}
+          <tr>
+            <td>{{order.2}}</td>
+            <td>{{order.15}}</td>
+            <td>{{order.16}}</td>
+            <td>{{order.3}}</td>
+            <td>{{order.4}}</td>
+            <!-- <td>{{order.11}}</td> -->
+            <td>{{order.5}}</td>
+            <td>{{order.8}}</td>
+            <td>{{order.9}}</td>
+            <td>{{order.10}}</td>
+            <td>{{order.6}}</td>
+          </tr>
+          {% endfor %}
+        </tr>
+    </table>
+</body>
+
+</html>
